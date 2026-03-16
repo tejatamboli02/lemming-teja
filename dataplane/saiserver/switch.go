@@ -290,12 +290,22 @@ func (sw *saiSwitch) CreateSwitch(ctx context.Context, _ *saipb.CreateSwitchRequ
 		return nil, err
 	}
 
+	if _, err := sw.dataplane.FlowCounterCreate(ctx, &fwdpb.FlowCounterCreateRequest{
+		ContextId: &fwdpb.ContextId{Id: sw.dataplane.ID()},
+		Id:        &fwdpb.FlowCounterId{ObjectId: &fwdpb.ObjectId{Id: "no-route"}},
+	}); err != nil {
+		return nil, err
+	}
+
 	v4FIB := &fwdpb.TableCreateRequest{
 		ContextId: &fwdpb.ContextId{Id: sw.dataplane.ID()},
 		Desc: &fwdpb.TableDesc{
 			TableType: fwdpb.TableType_TABLE_TYPE_PREFIX,
 			TableId:   &fwdpb.TableId{ObjectId: &fwdpb.ObjectId{Id: FIBV4Table}},
-			Actions:   []*fwdpb.ActionDesc{fwdconfig.Action(fwdconfig.UpdateAction(fwdpb.UpdateType_UPDATE_TYPE_BIT_WRITE, fwdpb.PacketFieldNum_PACKET_FIELD_NUM_PACKET_ACTION).WithBitOp(1, 0).WithValue([]byte{0})).Build()},
+			Actions: []*fwdpb.ActionDesc{
+				fwdconfig.Action(fwdconfig.UpdateAction(fwdpb.UpdateType_UPDATE_TYPE_SET, fwdpb.PacketFieldNum_PACKET_FIELD_NUM_PACKET_ACTION).WithValue([]byte{0})).Build(),
+				fwdconfig.Action(fwdconfig.FlowCounterAction("no-route")).Build(),
+			},
 			Table: &fwdpb.TableDesc_Prefix{
 				Prefix: &fwdpb.PrefixTableDesc{
 					FieldIds: []*fwdpb.PacketFieldId{{
@@ -319,7 +329,10 @@ func (sw *saiSwitch) CreateSwitch(ctx context.Context, _ *saipb.CreateSwitchRequ
 		Desc: &fwdpb.TableDesc{
 			TableType: fwdpb.TableType_TABLE_TYPE_PREFIX,
 			TableId:   &fwdpb.TableId{ObjectId: &fwdpb.ObjectId{Id: FIBV6Table}},
-			Actions:   []*fwdpb.ActionDesc{fwdconfig.Action(fwdconfig.UpdateAction(fwdpb.UpdateType_UPDATE_TYPE_BIT_WRITE, fwdpb.PacketFieldNum_PACKET_FIELD_NUM_PACKET_ACTION).WithBitOp(1, 0).WithValue([]byte{0})).Build()},
+			Actions: []*fwdpb.ActionDesc{
+				fwdconfig.Action(fwdconfig.UpdateAction(fwdpb.UpdateType_UPDATE_TYPE_SET, fwdpb.PacketFieldNum_PACKET_FIELD_NUM_PACKET_ACTION).WithValue([]byte{0})).Build(),
+				fwdconfig.Action(fwdconfig.FlowCounterAction("no-route")).Build(),
+			},
 			Table: &fwdpb.TableDesc_Prefix{
 				Prefix: &fwdpb.PrefixTableDesc{
 					FieldIds: []*fwdpb.PacketFieldId{{
@@ -1007,6 +1020,7 @@ func (sw *saiSwitch) createOutputTable(ctx context.Context, cpuPortID string) er
 	req := fwdconfig.TableEntryAddRequest(sw.dataplane.ID(), outputTable).AppendEntry(
 		fwdconfig.EntryDesc(fwdconfig.ExactEntry(fwdconfig.PacketFieldBytes(fwdpb.PacketFieldNum_PACKET_FIELD_NUM_PACKET_ACTION).WithBytes([]byte{0}))), // DROP
 		fwdconfig.DropAction(),
+		fwdconfig.FlowCounterAction("no-route"),
 	).AppendEntry(
 		fwdconfig.EntryDesc(fwdconfig.ExactEntry(fwdconfig.PacketFieldBytes(fwdpb.PacketFieldNum_PACKET_FIELD_NUM_PACKET_ACTION).WithBytes([]byte{1}))), // FORWARD
 		fwdconfig.DecapAction(fwdpb.PacketHeaderId_PACKET_HEADER_ID_ETHERNET),                                                                           // Decap L2 header.
