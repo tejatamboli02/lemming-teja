@@ -386,11 +386,18 @@ convert_list_sai_acl_action_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_acl_action_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_action_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclActionType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_action_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclActionType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclBindPointType
@@ -449,11 +456,18 @@ convert_list_sai_acl_bind_point_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_acl_bind_point_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_bind_point_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclBindPointType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_bind_point_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclBindPointType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclCounterAttr convert_sai_acl_counter_attr_t_to_proto(
@@ -518,11 +532,18 @@ convert_list_sai_acl_counter_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_acl_counter_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_counter_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclCounterAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_counter_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclCounterAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclDtelFlowOp convert_sai_acl_dtel_flow_op_t_to_proto(
@@ -575,11 +596,18 @@ convert_list_sai_acl_dtel_flow_op_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_acl_dtel_flow_op_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_dtel_flow_op_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclDtelFlowOp>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_dtel_flow_op_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclDtelFlowOp>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclEntryAttr convert_sai_acl_entry_attr_t_to_proto(
@@ -1570,11 +1598,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_acl_entry_attr_t_to_proto(
 void convert_list_sai_acl_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclIpFrag convert_sai_acl_ip_frag_t_to_proto(
@@ -1633,11 +1668,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_acl_ip_frag_t_to_proto(
 void convert_list_sai_acl_ip_frag_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_ip_frag_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclIpFrag>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_ip_frag_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclIpFrag>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclIpType convert_sai_acl_ip_type_t_to_proto(
@@ -1726,11 +1768,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_acl_ip_type_t_to_proto(
 void convert_list_sai_acl_ip_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_ip_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclIpType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_ip_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclIpType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclRangeAttr convert_sai_acl_range_attr_t_to_proto(
@@ -1771,11 +1820,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_acl_range_attr_t_to_proto(
 void convert_list_sai_acl_range_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_range_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclRangeAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_range_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclRangeAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclRangeType convert_sai_acl_range_type_t_to_proto(
@@ -1834,11 +1890,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_acl_range_type_t_to_proto(
 void convert_list_sai_acl_range_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_range_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclRangeType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_range_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclRangeType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclStage convert_sai_acl_stage_t_to_proto(
@@ -1903,11 +1966,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_acl_stage_t_to_proto(
 void convert_list_sai_acl_stage_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_stage_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclStage>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_stage_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclStage>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclTableAttr convert_sai_acl_table_attr_t_to_proto(
@@ -2584,11 +2654,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_acl_table_attr_t_to_proto(
 void convert_list_sai_acl_table_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_table_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclTableAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_table_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclTableAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclTableChainGroupAttr
@@ -2632,12 +2709,19 @@ convert_list_sai_acl_table_chain_group_attr_t_to_proto(
 void convert_list_sai_acl_table_chain_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_table_chain_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclTableChainGroupAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_table_chain_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclTableChainGroupAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclTableChainGroupStage
@@ -2693,12 +2777,19 @@ convert_list_sai_acl_table_chain_group_stage_t_to_proto(
 void convert_list_sai_acl_table_chain_group_stage_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_table_chain_group_stage_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclTableChainGroupStage>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_table_chain_group_stage_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclTableChainGroupStage>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclTableChainGroupType
@@ -2742,12 +2833,19 @@ convert_list_sai_acl_table_chain_group_type_t_to_proto(
 void convert_list_sai_acl_table_chain_group_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_table_chain_group_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclTableChainGroupType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_table_chain_group_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclTableChainGroupType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclTableGroupAttr
@@ -2807,11 +2905,18 @@ convert_list_sai_acl_table_group_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_acl_table_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_table_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclTableGroupAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_table_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclTableGroupAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclTableGroupMemberAttr
@@ -2871,12 +2976,19 @@ convert_list_sai_acl_table_group_member_attr_t_to_proto(
 void convert_list_sai_acl_table_group_member_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_table_group_member_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclTableGroupMemberAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_table_group_member_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclTableGroupMemberAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclTableGroupType
@@ -2917,11 +3029,18 @@ convert_list_sai_acl_table_group_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_acl_table_group_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_table_group_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclTableGroupType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_table_group_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclTableGroupType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclTableMatchType
@@ -2962,11 +3081,18 @@ convert_list_sai_acl_table_match_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_acl_table_match_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_table_match_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclTableMatchType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_table_match_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclTableMatchType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::AclTableSupportedMatchType
@@ -3011,12 +3137,19 @@ convert_list_sai_acl_table_supported_match_type_t_to_proto(
 void convert_list_sai_acl_table_supported_match_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_acl_table_supported_match_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::AclTableSupportedMatchType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_acl_table_supported_match_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::AclTableSupportedMatchType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::ApiExtensions convert_sai_api_extensions_t_to_proto(
@@ -3141,11 +3274,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_api_extensions_t_to_proto(
 void convert_list_sai_api_extensions_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_api_extensions_t_to_sai(
-        static_cast<lemming::dataplane::sai::ApiExtensions>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_api_extensions_t_to_sai(
+          static_cast<lemming::dataplane::sai::ApiExtensions>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::Api convert_sai_api_t_to_proto(const sai_int32_t val) {
@@ -3502,11 +3642,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_api_t_to_proto(
 void convert_list_sai_api_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_api_t_to_sai(
-        static_cast<lemming::dataplane::sai::Api>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_api_t_to_sai(
+          static_cast<lemming::dataplane::sai::Api>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BfdEncapsulationType
@@ -3559,12 +3706,19 @@ convert_list_sai_bfd_encapsulation_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_bfd_encapsulation_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bfd_encapsulation_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::BfdEncapsulationType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bfd_encapsulation_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::BfdEncapsulationType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BfdSessionAttr convert_sai_bfd_session_attr_t_to_proto(
@@ -3851,11 +4005,18 @@ convert_list_sai_bfd_session_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_bfd_session_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bfd_session_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::BfdSessionAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bfd_session_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::BfdSessionAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BfdSessionOffloadType
@@ -3904,12 +4065,19 @@ convert_list_sai_bfd_session_offload_type_t_to_proto(
 void convert_list_sai_bfd_session_offload_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bfd_session_offload_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::BfdSessionOffloadType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bfd_session_offload_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::BfdSessionOffloadType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BfdSessionStat convert_sai_bfd_session_stat_t_to_proto(
@@ -3956,11 +4124,18 @@ convert_list_sai_bfd_session_stat_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_bfd_session_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bfd_session_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::BfdSessionStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bfd_session_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::BfdSessionStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BfdSessionState
@@ -4013,11 +4188,18 @@ convert_list_sai_bfd_session_state_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_bfd_session_state_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bfd_session_state_t_to_sai(
-        static_cast<lemming::dataplane::sai::BfdSessionState>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bfd_session_state_t_to_sai(
+          static_cast<lemming::dataplane::sai::BfdSessionState>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BfdSessionType convert_sai_bfd_session_type_t_to_proto(
@@ -4070,11 +4252,18 @@ convert_list_sai_bfd_session_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_bfd_session_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bfd_session_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::BfdSessionType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bfd_session_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::BfdSessionType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BridgeAttr convert_sai_bridge_attr_t_to_proto(
@@ -4179,11 +4368,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_bridge_attr_t_to_proto(
 void convert_list_sai_bridge_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bridge_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::BridgeAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bridge_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::BridgeAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BridgeFloodControlType
@@ -4238,12 +4434,19 @@ convert_list_sai_bridge_flood_control_type_t_to_proto(
 void convert_list_sai_bridge_flood_control_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bridge_flood_control_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::BridgeFloodControlType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bridge_flood_control_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::BridgeFloodControlType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BridgePortAttr convert_sai_bridge_port_attr_t_to_proto(
@@ -4370,11 +4573,18 @@ convert_list_sai_bridge_port_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_bridge_port_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bridge_port_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::BridgePortAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bridge_port_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::BridgePortAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BridgePortFdbLearningMode
@@ -4444,12 +4654,19 @@ convert_list_sai_bridge_port_fdb_learning_mode_t_to_proto(
 void convert_list_sai_bridge_port_fdb_learning_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bridge_port_fdb_learning_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::BridgePortFdbLearningMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bridge_port_fdb_learning_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::BridgePortFdbLearningMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BridgePortStat convert_sai_bridge_port_stat_t_to_proto(
@@ -4502,11 +4719,18 @@ convert_list_sai_bridge_port_stat_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_bridge_port_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bridge_port_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::BridgePortStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bridge_port_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::BridgePortStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BridgePortTaggingMode
@@ -4549,12 +4773,19 @@ convert_list_sai_bridge_port_tagging_mode_t_to_proto(
 void convert_list_sai_bridge_port_tagging_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bridge_port_tagging_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::BridgePortTaggingMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bridge_port_tagging_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::BridgePortTaggingMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BridgePortType convert_sai_bridge_port_type_t_to_proto(
@@ -4613,11 +4844,18 @@ convert_list_sai_bridge_port_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_bridge_port_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bridge_port_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::BridgePortType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bridge_port_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::BridgePortType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BridgeStat convert_sai_bridge_stat_t_to_proto(
@@ -4670,11 +4908,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_bridge_stat_t_to_proto(
 void convert_list_sai_bridge_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bridge_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::BridgeStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bridge_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::BridgeStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BridgeType convert_sai_bridge_type_t_to_proto(
@@ -4715,11 +4960,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_bridge_type_t_to_proto(
 void convert_list_sai_bridge_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bridge_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::BridgeType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bridge_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::BridgeType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BufferPoolAttr convert_sai_buffer_pool_attr_t_to_proto(
@@ -4802,11 +5054,18 @@ convert_list_sai_buffer_pool_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_buffer_pool_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_buffer_pool_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::BufferPoolAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_buffer_pool_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::BufferPoolAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BufferPoolStat convert_sai_buffer_pool_stat_t_to_proto(
@@ -4981,11 +5240,18 @@ convert_list_sai_buffer_pool_stat_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_buffer_pool_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_buffer_pool_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::BufferPoolStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_buffer_pool_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::BufferPoolStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BufferPoolThresholdMode
@@ -5029,12 +5295,19 @@ convert_list_sai_buffer_pool_threshold_mode_t_to_proto(
 void convert_list_sai_buffer_pool_threshold_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_buffer_pool_threshold_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::BufferPoolThresholdMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_buffer_pool_threshold_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::BufferPoolThresholdMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BufferPoolType convert_sai_buffer_pool_type_t_to_proto(
@@ -5081,11 +5354,18 @@ convert_list_sai_buffer_pool_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_buffer_pool_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_buffer_pool_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::BufferPoolType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_buffer_pool_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::BufferPoolType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BufferProfileAttr
@@ -5162,11 +5442,18 @@ convert_list_sai_buffer_profile_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_buffer_profile_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_buffer_profile_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::BufferProfileAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_buffer_profile_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::BufferProfileAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BufferProfileThresholdMode
@@ -5210,12 +5497,19 @@ convert_list_sai_buffer_profile_threshold_mode_t_to_proto(
 void convert_list_sai_buffer_profile_threshold_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_buffer_profile_threshold_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::BufferProfileThresholdMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_buffer_profile_threshold_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::BufferProfileThresholdMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::BulkOpErrorMode
@@ -5256,11 +5550,18 @@ convert_list_sai_bulk_op_error_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_bulk_op_error_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_bulk_op_error_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::BulkOpErrorMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_bulk_op_error_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::BulkOpErrorMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::CommonApi convert_sai_common_api_t_to_proto(
@@ -5343,11 +5644,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_common_api_t_to_proto(
 void convert_list_sai_common_api_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_common_api_t_to_sai(
-        static_cast<lemming::dataplane::sai::CommonApi>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_common_api_t_to_sai(
+          static_cast<lemming::dataplane::sai::CommonApi>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::CounterAttr convert_sai_counter_attr_t_to_proto(
@@ -5412,11 +5720,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_counter_attr_t_to_proto(
 void convert_list_sai_counter_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_counter_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::CounterAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_counter_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::CounterAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::CounterStat convert_sai_counter_stat_t_to_proto(
@@ -5463,11 +5778,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_counter_stat_t_to_proto(
 void convert_list_sai_counter_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_counter_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::CounterStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_counter_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::CounterStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::CounterType convert_sai_counter_type_t_to_proto(
@@ -5508,11 +5830,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_counter_type_t_to_proto(
 void convert_list_sai_counter_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_counter_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::CounterType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_counter_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::CounterType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashCapsHaScopeLevel
@@ -5555,12 +5884,19 @@ convert_list_sai_dash_caps_ha_scope_level_t_to_proto(
 void convert_list_sai_dash_caps_ha_scope_level_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_caps_ha_scope_level_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashCapsHaScopeLevel>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_caps_ha_scope_level_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashCapsHaScopeLevel>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashDirection convert_sai_dash_direction_t_to_proto(
@@ -5607,11 +5943,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_dash_direction_t_to_proto(
 void convert_list_sai_dash_direction_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_direction_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashDirection>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_direction_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashDirection>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashEncapsulation
@@ -5658,11 +6001,18 @@ convert_list_sai_dash_encapsulation_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_dash_encapsulation_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_encapsulation_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashEncapsulation>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_encapsulation_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashEncapsulation>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashEniMacOverrideType
@@ -5712,12 +6062,19 @@ convert_list_sai_dash_eni_mac_override_type_t_to_proto(
 void convert_list_sai_dash_eni_mac_override_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_eni_mac_override_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashEniMacOverrideType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_eni_mac_override_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashEniMacOverrideType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashFlowAction convert_sai_dash_flow_action_t_to_proto(
@@ -5752,11 +6109,18 @@ convert_list_sai_dash_flow_action_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_dash_flow_action_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_flow_action_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashFlowAction>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_flow_action_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashFlowAction>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashFlowEnabledKey
@@ -5827,12 +6191,19 @@ convert_list_sai_dash_flow_enabled_key_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_dash_flow_enabled_key_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_flow_enabled_key_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashFlowEnabledKey>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_flow_enabled_key_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashFlowEnabledKey>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashFlowEntryBulkGetSessionFilterKey
@@ -5939,13 +6310,20 @@ convert_list_sai_dash_flow_entry_bulk_get_session_filter_key_t_to_proto(
 void convert_list_sai_dash_flow_entry_bulk_get_session_filter_key_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_flow_entry_bulk_get_session_filter_key_t_to_sai(
-        static_cast<
-            lemming::dataplane::sai::DashFlowEntryBulkGetSessionFilterKey>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_flow_entry_bulk_get_session_filter_key_t_to_sai(
+          static_cast<
+              lemming::dataplane::sai::DashFlowEntryBulkGetSessionFilterKey>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashFlowEntryBulkGetSessionMode
@@ -6011,12 +6389,19 @@ convert_list_sai_dash_flow_entry_bulk_get_session_mode_t_to_proto(
 void convert_list_sai_dash_flow_entry_bulk_get_session_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_flow_entry_bulk_get_session_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashFlowEntryBulkGetSessionMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_flow_entry_bulk_get_session_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashFlowEntryBulkGetSessionMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashFlowEntryBulkGetSessionOpKey
@@ -6099,12 +6484,19 @@ convert_list_sai_dash_flow_entry_bulk_get_session_op_key_t_to_proto(
 void convert_list_sai_dash_flow_entry_bulk_get_session_op_key_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_flow_entry_bulk_get_session_op_key_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashFlowEntryBulkGetSessionOpKey>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_flow_entry_bulk_get_session_op_key_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashFlowEntryBulkGetSessionOpKey>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashHaRole convert_sai_dash_ha_role_t_to_proto(
@@ -6163,11 +6555,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_dash_ha_role_t_to_proto(
 void convert_list_sai_dash_ha_role_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_ha_role_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashHaRole>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_ha_role_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashHaRole>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashHaState convert_sai_dash_ha_state_t_to_proto(
@@ -6275,11 +6674,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_dash_ha_state_t_to_proto(
 void convert_list_sai_dash_ha_state_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_ha_state_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashHaState>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_ha_state_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashHaState>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashRoutingActions
@@ -6338,12 +6744,19 @@ convert_list_sai_dash_routing_actions_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_dash_routing_actions_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_routing_actions_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashRoutingActions>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_routing_actions_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashRoutingActions>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DashTunnelDscpMode
@@ -6384,12 +6797,19 @@ convert_list_sai_dash_tunnel_dscp_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_dash_tunnel_dscp_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dash_tunnel_dscp_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::DashTunnelDscpMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dash_tunnel_dscp_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::DashTunnelDscpMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DebugCounterAttr
@@ -6448,11 +6868,18 @@ convert_list_sai_debug_counter_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_debug_counter_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_debug_counter_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::DebugCounterAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_debug_counter_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::DebugCounterAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DebugCounterBindMethod
@@ -6489,12 +6916,19 @@ convert_list_sai_debug_counter_bind_method_t_to_proto(
 void convert_list_sai_debug_counter_bind_method_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_debug_counter_bind_method_t_to_sai(
-        static_cast<lemming::dataplane::sai::DebugCounterBindMethod>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_debug_counter_bind_method_t_to_sai(
+          static_cast<lemming::dataplane::sai::DebugCounterBindMethod>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DebugCounterType
@@ -6548,11 +6982,18 @@ convert_list_sai_debug_counter_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_debug_counter_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_debug_counter_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::DebugCounterType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_debug_counter_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::DebugCounterType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DtelAttr convert_sai_dtel_attr_t_to_proto(
@@ -6641,11 +7082,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_dtel_attr_t_to_proto(
 void convert_list_sai_dtel_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dtel_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::DtelAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dtel_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::DtelAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DtelEventAttr convert_sai_dtel_event_attr_t_to_proto(
@@ -6692,11 +7140,18 @@ convert_list_sai_dtel_event_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_dtel_event_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dtel_event_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::DtelEventAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dtel_event_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::DtelEventAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DtelEventType convert_sai_dtel_event_type_t_to_proto(
@@ -6768,11 +7223,18 @@ convert_list_sai_dtel_event_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_dtel_event_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dtel_event_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::DtelEventType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dtel_event_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::DtelEventType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DtelIntSessionAttr
@@ -6842,12 +7304,19 @@ convert_list_sai_dtel_int_session_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_dtel_int_session_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dtel_int_session_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::DtelIntSessionAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dtel_int_session_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::DtelIntSessionAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DtelQueueReportAttr
@@ -6906,12 +7375,19 @@ convert_list_sai_dtel_queue_report_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_dtel_queue_report_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dtel_queue_report_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::DtelQueueReportAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dtel_queue_report_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::DtelQueueReportAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::DtelReportSessionAttr
@@ -6973,12 +7449,19 @@ convert_list_sai_dtel_report_session_attr_t_to_proto(
 void convert_list_sai_dtel_report_session_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_dtel_report_session_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::DtelReportSessionAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_dtel_report_session_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::DtelReportSessionAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::EcnMarkMode convert_sai_ecn_mark_mode_t_to_proto(
@@ -7055,11 +7538,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ecn_mark_mode_t_to_proto(
 void convert_list_sai_ecn_mark_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ecn_mark_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::EcnMarkMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ecn_mark_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::EcnMarkMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::ErspanEncapsulationType
@@ -7098,12 +7588,19 @@ convert_list_sai_erspan_encapsulation_type_t_to_proto(
 void convert_list_sai_erspan_encapsulation_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_erspan_encapsulation_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::ErspanEncapsulationType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_erspan_encapsulation_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::ErspanEncapsulationType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::FdbEntryAttr convert_sai_fdb_entry_attr_t_to_proto(
@@ -7180,11 +7677,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_fdb_entry_attr_t_to_proto(
 void convert_list_sai_fdb_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_fdb_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::FdbEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_fdb_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::FdbEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::FdbEntryType convert_sai_fdb_entry_type_t_to_proto(
@@ -7225,11 +7729,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_fdb_entry_type_t_to_proto(
 void convert_list_sai_fdb_entry_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_fdb_entry_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::FdbEntryType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_fdb_entry_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::FdbEntryType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::FdbEvent convert_sai_fdb_event_t_to_proto(
@@ -7282,11 +7793,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_fdb_event_t_to_proto(
 void convert_list_sai_fdb_event_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_fdb_event_t_to_sai(
-        static_cast<lemming::dataplane::sai::FdbEvent>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_fdb_event_t_to_sai(
+          static_cast<lemming::dataplane::sai::FdbEvent>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::FdbFlushAttr convert_sai_fdb_flush_attr_t_to_proto(
@@ -7333,11 +7851,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_fdb_flush_attr_t_to_proto(
 void convert_list_sai_fdb_flush_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_fdb_flush_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::FdbFlushAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_fdb_flush_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::FdbFlushAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::FdbFlushEntryType
@@ -7384,11 +7909,18 @@ convert_list_sai_fdb_flush_entry_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_fdb_flush_entry_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_fdb_flush_entry_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::FdbFlushEntryType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_fdb_flush_entry_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::FdbFlushEntryType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::FineGrainedHashFieldAttr
@@ -7446,12 +7978,19 @@ convert_list_sai_fine_grained_hash_field_attr_t_to_proto(
 void convert_list_sai_fine_grained_hash_field_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_fine_grained_hash_field_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::FineGrainedHashFieldAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_fine_grained_hash_field_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::FineGrainedHashFieldAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::GenericProgrammableAttr
@@ -7500,12 +8039,19 @@ convert_list_sai_generic_programmable_attr_t_to_proto(
 void convert_list_sai_generic_programmable_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_generic_programmable_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::GenericProgrammableAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_generic_programmable_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::GenericProgrammableAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HaScopeEvent convert_sai_ha_scope_event_t_to_proto(
@@ -7552,11 +8098,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ha_scope_event_t_to_proto(
 void convert_list_sai_ha_scope_event_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ha_scope_event_t_to_sai(
-        static_cast<lemming::dataplane::sai::HaScopeEvent>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ha_scope_event_t_to_sai(
+          static_cast<lemming::dataplane::sai::HaScopeEvent>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HaSetEvent convert_sai_ha_set_event_t_to_proto(
@@ -7597,11 +8150,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ha_set_event_t_to_proto(
 void convert_list_sai_ha_set_event_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ha_set_event_t_to_sai(
-        static_cast<lemming::dataplane::sai::HaSetEvent>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ha_set_event_t_to_sai(
+          static_cast<lemming::dataplane::sai::HaSetEvent>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HashAlgorithm convert_sai_hash_algorithm_t_to_proto(
@@ -7672,11 +8232,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_hash_algorithm_t_to_proto(
 void convert_list_sai_hash_algorithm_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hash_algorithm_t_to_sai(
-        static_cast<lemming::dataplane::sai::HashAlgorithm>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hash_algorithm_t_to_sai(
+          static_cast<lemming::dataplane::sai::HashAlgorithm>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HashAttr convert_sai_hash_attr_t_to_proto(
@@ -7723,11 +8290,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_hash_attr_t_to_proto(
 void convert_list_sai_hash_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hash_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::HashAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hash_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::HashAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HealthDataType convert_sai_health_data_type_t_to_proto(
@@ -7768,11 +8342,18 @@ convert_list_sai_health_data_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_health_data_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_health_data_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::HealthDataType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_health_data_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::HealthDataType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifAttr convert_sai_hostif_attr_t_to_proto(
@@ -7843,11 +8424,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_hostif_attr_t_to_proto(
 void convert_list_sai_hostif_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifTableEntryAttr
@@ -7908,12 +8496,19 @@ convert_list_sai_hostif_table_entry_attr_t_to_proto(
 void convert_list_sai_hostif_table_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_table_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifTableEntryAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_table_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifTableEntryAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifTableEntryChannelType
@@ -7986,12 +8581,19 @@ convert_list_sai_hostif_table_entry_channel_type_t_to_proto(
 void convert_list_sai_hostif_table_entry_channel_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_table_entry_channel_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifTableEntryChannelType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_table_entry_channel_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifTableEntryChannelType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifTableEntryType
@@ -8052,12 +8654,19 @@ convert_list_sai_hostif_table_entry_type_t_to_proto(
 void convert_list_sai_hostif_table_entry_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_table_entry_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifTableEntryType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_table_entry_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifTableEntryType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifTrapAttr convert_sai_hostif_trap_attr_t_to_proto(
@@ -8128,11 +8737,18 @@ convert_list_sai_hostif_trap_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_hostif_trap_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_trap_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifTrapAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_trap_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifTrapAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifTrapGroupAttr
@@ -8185,12 +8801,19 @@ convert_list_sai_hostif_trap_group_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_hostif_trap_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_trap_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifTrapGroupAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_trap_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifTrapGroupAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifTrapType convert_sai_hostif_trap_type_t_to_proto(
@@ -8657,11 +9280,18 @@ convert_list_sai_hostif_trap_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_hostif_trap_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_trap_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifTrapType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_trap_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifTrapType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifTxType convert_sai_hostif_tx_type_t_to_proto(
@@ -8708,11 +9338,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_hostif_tx_type_t_to_proto(
 void convert_list_sai_hostif_tx_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_tx_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifTxType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_tx_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifTxType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifType convert_sai_hostif_type_t_to_proto(
@@ -8759,11 +9396,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_hostif_type_t_to_proto(
 void convert_list_sai_hostif_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifUserDefinedTrapAttr
@@ -8814,12 +9458,19 @@ convert_list_sai_hostif_user_defined_trap_attr_t_to_proto(
 void convert_list_sai_hostif_user_defined_trap_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_user_defined_trap_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifUserDefinedTrapAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_user_defined_trap_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifUserDefinedTrapAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifUserDefinedTrapType
@@ -8901,12 +9552,19 @@ convert_list_sai_hostif_user_defined_trap_type_t_to_proto(
 void convert_list_sai_hostif_user_defined_trap_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_user_defined_trap_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifUserDefinedTrapType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_user_defined_trap_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifUserDefinedTrapType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::HostifVlanTag convert_sai_hostif_vlan_tag_t_to_proto(
@@ -8953,11 +9611,18 @@ convert_list_sai_hostif_vlan_tag_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_hostif_vlan_tag_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_hostif_vlan_tag_t_to_sai(
-        static_cast<lemming::dataplane::sai::HostifVlanTag>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_hostif_vlan_tag_t_to_sai(
+          static_cast<lemming::dataplane::sai::HostifVlanTag>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IcmpEchoSessionAttr
@@ -9103,12 +9768,19 @@ convert_list_sai_icmp_echo_session_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_icmp_echo_session_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_icmp_echo_session_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IcmpEchoSessionAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_icmp_echo_session_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IcmpEchoSessionAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IcmpEchoSessionStat
@@ -9149,12 +9821,19 @@ convert_list_sai_icmp_echo_session_stat_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_icmp_echo_session_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_icmp_echo_session_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::IcmpEchoSessionStat>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_icmp_echo_session_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::IcmpEchoSessionStat>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IcmpEchoSessionState
@@ -9197,12 +9876,19 @@ convert_list_sai_icmp_echo_session_state_t_to_proto(
 void convert_list_sai_icmp_echo_session_state_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_icmp_echo_session_state_t_to_sai(
-        static_cast<lemming::dataplane::sai::IcmpEchoSessionState>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_icmp_echo_session_state_t_to_sai(
+          static_cast<lemming::dataplane::sai::IcmpEchoSessionState>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::InDropReason convert_sai_in_drop_reason_t_to_proto(
@@ -9579,11 +10265,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_in_drop_reason_t_to_proto(
 void convert_list_sai_in_drop_reason_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_in_drop_reason_t_to_sai(
-        static_cast<lemming::dataplane::sai::InDropReason>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_in_drop_reason_t_to_sai(
+          static_cast<lemming::dataplane::sai::InDropReason>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IngressPriorityGroupAttr
@@ -9655,12 +10348,19 @@ convert_list_sai_ingress_priority_group_attr_t_to_proto(
 void convert_list_sai_ingress_priority_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ingress_priority_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IngressPriorityGroupAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ingress_priority_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IngressPriorityGroupAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IngressPriorityGroupStat
@@ -9765,12 +10465,19 @@ convert_list_sai_ingress_priority_group_stat_t_to_proto(
 void convert_list_sai_ingress_priority_group_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ingress_priority_group_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::IngressPriorityGroupStat>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ingress_priority_group_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::IngressPriorityGroupStat>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::InsegEntryAttr convert_sai_inseg_entry_attr_t_to_proto(
@@ -9865,11 +10572,18 @@ convert_list_sai_inseg_entry_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_inseg_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_inseg_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::InsegEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_inseg_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::InsegEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::InsegEntryPopQosMode
@@ -9912,12 +10626,19 @@ convert_list_sai_inseg_entry_pop_qos_mode_t_to_proto(
 void convert_list_sai_inseg_entry_pop_qos_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_inseg_entry_pop_qos_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::InsegEntryPopQosMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_inseg_entry_pop_qos_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::InsegEntryPopQosMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::InsegEntryPopTtlMode
@@ -9960,12 +10681,19 @@ convert_list_sai_inseg_entry_pop_ttl_mode_t_to_proto(
 void convert_list_sai_inseg_entry_pop_ttl_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_inseg_entry_pop_ttl_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::InsegEntryPopTtlMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_inseg_entry_pop_ttl_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::InsegEntryPopTtlMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::InsegEntryPscType
@@ -10006,11 +10734,18 @@ convert_list_sai_inseg_entry_psc_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_inseg_entry_psc_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_inseg_entry_psc_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::InsegEntryPscType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_inseg_entry_psc_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::InsegEntryPscType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpAddrFamily convert_sai_ip_addr_family_t_to_proto(
@@ -10051,11 +10786,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ip_addr_family_t_to_proto(
 void convert_list_sai_ip_addr_family_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ip_addr_family_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpAddrFamily>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ip_addr_family_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpAddrFamily>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpmcEntryAttr convert_sai_ipmc_entry_attr_t_to_proto(
@@ -10108,11 +10850,18 @@ convert_list_sai_ipmc_entry_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_ipmc_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipmc_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpmcEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipmc_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpmcEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpmcEntryType convert_sai_ipmc_entry_type_t_to_proto(
@@ -10153,11 +10902,18 @@ convert_list_sai_ipmc_entry_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_ipmc_entry_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipmc_entry_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpmcEntryType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipmc_entry_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpmcEntryType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpmcGroupAttr convert_sai_ipmc_group_attr_t_to_proto(
@@ -10198,11 +10954,18 @@ convert_list_sai_ipmc_group_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_ipmc_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipmc_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpmcGroupAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipmc_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpmcGroupAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpmcGroupMemberAttr
@@ -10243,12 +11006,19 @@ convert_list_sai_ipmc_group_member_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_ipmc_group_member_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipmc_group_member_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpmcGroupMemberAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipmc_group_member_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpmcGroupMemberAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpsecAttr convert_sai_ipsec_attr_t_to_proto(
@@ -10402,11 +11172,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ipsec_attr_t_to_proto(
 void convert_list_sai_ipsec_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipsec_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpsecAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipsec_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpsecAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpsecCipher convert_sai_ipsec_cipher_t_to_proto(
@@ -10459,11 +11236,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ipsec_cipher_t_to_proto(
 void convert_list_sai_ipsec_cipher_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipsec_cipher_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpsecCipher>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipsec_cipher_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpsecCipher>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpsecDirection convert_sai_ipsec_direction_t_to_proto(
@@ -10504,11 +11288,18 @@ convert_list_sai_ipsec_direction_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_ipsec_direction_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipsec_direction_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpsecDirection>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipsec_direction_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpsecDirection>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpsecPortAttr convert_sai_ipsec_port_attr_t_to_proto(
@@ -10586,11 +11377,18 @@ convert_list_sai_ipsec_port_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_ipsec_port_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipsec_port_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpsecPortAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipsec_port_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpsecPortAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpsecPortStat convert_sai_ipsec_port_stat_t_to_proto(
@@ -10655,11 +11453,18 @@ convert_list_sai_ipsec_port_stat_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_ipsec_port_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipsec_port_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpsecPortStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipsec_port_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpsecPortStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpsecSaAttr convert_sai_ipsec_sa_attr_t_to_proto(
@@ -10828,11 +11633,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ipsec_sa_attr_t_to_proto(
 void convert_list_sai_ipsec_sa_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipsec_sa_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpsecSaAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipsec_sa_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpsecSaAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpsecSaOctetCountStatus
@@ -10888,12 +11700,19 @@ convert_list_sai_ipsec_sa_octet_count_status_t_to_proto(
 void convert_list_sai_ipsec_sa_octet_count_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipsec_sa_octet_count_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpsecSaOctetCountStatus>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipsec_sa_octet_count_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpsecSaOctetCountStatus>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IpsecSaStat convert_sai_ipsec_sa_stat_t_to_proto(
@@ -10982,11 +11801,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ipsec_sa_stat_t_to_proto(
 void convert_list_sai_ipsec_sa_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ipsec_sa_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::IpsecSaStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ipsec_sa_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::IpsecSaStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IsolationGroupAttr
@@ -11028,12 +11854,19 @@ convert_list_sai_isolation_group_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_isolation_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_isolation_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IsolationGroupAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_isolation_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IsolationGroupAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IsolationGroupMemberAttr
@@ -11080,12 +11913,19 @@ convert_list_sai_isolation_group_member_attr_t_to_proto(
 void convert_list_sai_isolation_group_member_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_isolation_group_member_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::IsolationGroupMemberAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_isolation_group_member_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::IsolationGroupMemberAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::IsolationGroupType
@@ -11126,12 +11966,19 @@ convert_list_sai_isolation_group_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_isolation_group_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_isolation_group_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::IsolationGroupType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_isolation_group_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::IsolationGroupType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::L2mcEntryAttr convert_sai_l2mc_entry_attr_t_to_proto(
@@ -11172,11 +12019,18 @@ convert_list_sai_l2mc_entry_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_l2mc_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_l2mc_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::L2mcEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_l2mc_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::L2mcEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::L2mcEntryType convert_sai_l2mc_entry_type_t_to_proto(
@@ -11217,11 +12071,18 @@ convert_list_sai_l2mc_entry_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_l2mc_entry_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_l2mc_entry_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::L2mcEntryType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_l2mc_entry_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::L2mcEntryType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::L2mcGroupAttr convert_sai_l2mc_group_attr_t_to_proto(
@@ -11262,11 +12123,18 @@ convert_list_sai_l2mc_group_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_l2mc_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_l2mc_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::L2mcGroupAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_l2mc_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::L2mcGroupAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::L2mcGroupMemberAttr
@@ -11313,12 +12181,19 @@ convert_list_sai_l2mc_group_member_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_l2mc_group_member_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_l2mc_group_member_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::L2mcGroupMemberAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_l2mc_group_member_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::L2mcGroupMemberAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::LagAttr convert_sai_lag_attr_t_to_proto(
@@ -11425,11 +12300,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_lag_attr_t_to_proto(
 void convert_list_sai_lag_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_lag_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::LagAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_lag_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::LagAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::LagMemberAttr convert_sai_lag_member_attr_t_to_proto(
@@ -11482,11 +12364,18 @@ convert_list_sai_lag_member_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_lag_member_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_lag_member_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::LagMemberAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_lag_member_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::LagMemberAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::LogLevel convert_sai_log_level_t_to_proto(
@@ -11551,11 +12440,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_log_level_t_to_proto(
 void convert_list_sai_log_level_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_log_level_t_to_sai(
-        static_cast<lemming::dataplane::sai::LogLevel>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_log_level_t_to_sai(
+          static_cast<lemming::dataplane::sai::LogLevel>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecAttr convert_sai_macsec_attr_t_to_proto(
@@ -11746,11 +12642,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_macsec_attr_t_to_proto(
 void convert_list_sai_macsec_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecCipherSuite
@@ -11803,11 +12706,18 @@ convert_list_sai_macsec_cipher_suite_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_macsec_cipher_suite_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_cipher_suite_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecCipherSuite>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_cipher_suite_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecCipherSuite>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecDirection
@@ -11848,11 +12758,18 @@ convert_list_sai_macsec_direction_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_macsec_direction_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_direction_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecDirection>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_direction_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecDirection>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecFlowAttr convert_sai_macsec_flow_attr_t_to_proto(
@@ -11911,11 +12828,18 @@ convert_list_sai_macsec_flow_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_macsec_flow_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_flow_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecFlowAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_flow_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecFlowAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecFlowStat convert_sai_macsec_flow_stat_t_to_proto(
@@ -12062,11 +12986,18 @@ convert_list_sai_macsec_flow_stat_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_macsec_flow_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_flow_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecFlowStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_flow_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecFlowStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecMaxSecureAssociationsPerSc
@@ -12113,12 +13044,19 @@ convert_list_sai_macsec_max_secure_associations_per_sc_t_to_proto(
 void convert_list_sai_macsec_max_secure_associations_per_sc_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_max_secure_associations_per_sc_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecMaxSecureAssociationsPerSc>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_max_secure_associations_per_sc_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecMaxSecureAssociationsPerSc>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecPortAttr convert_sai_macsec_port_attr_t_to_proto(
@@ -12189,11 +13127,18 @@ convert_list_sai_macsec_port_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_macsec_port_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_port_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecPortAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_port_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecPortAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecPortStat convert_sai_macsec_port_stat_t_to_proto(
@@ -12240,11 +13185,18 @@ convert_list_sai_macsec_port_stat_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_macsec_port_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_port_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecPortStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_port_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecPortStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecSaAttr convert_sai_macsec_sa_attr_t_to_proto(
@@ -12333,11 +13285,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_macsec_sa_attr_t_to_proto(
 void convert_list_sai_macsec_sa_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_sa_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecSaAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_sa_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecSaAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecSaStat convert_sai_macsec_sa_stat_t_to_proto(
@@ -12438,11 +13397,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_macsec_sa_stat_t_to_proto(
 void convert_list_sai_macsec_sa_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_sa_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecSaStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_sa_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecSaStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecScAttr convert_sai_macsec_sc_attr_t_to_proto(
@@ -12541,11 +13507,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_macsec_sc_attr_t_to_proto(
 void convert_list_sai_macsec_sc_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_sc_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecScAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_sc_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecScAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MacsecScStat convert_sai_macsec_sc_stat_t_to_proto(
@@ -12580,11 +13553,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_macsec_sc_stat_t_to_proto(
 void convert_list_sai_macsec_sc_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_macsec_sc_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::MacsecScStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_macsec_sc_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::MacsecScStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::McastFdbEntryAttr
@@ -12631,11 +13611,18 @@ convert_list_sai_mcast_fdb_entry_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_mcast_fdb_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_mcast_fdb_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::McastFdbEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_mcast_fdb_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::McastFdbEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MeterType convert_sai_meter_type_t_to_proto(
@@ -12682,11 +13669,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_meter_type_t_to_proto(
 void convert_list_sai_meter_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_meter_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::MeterType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_meter_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::MeterType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MirrorSessionAttr
@@ -12873,11 +13867,18 @@ convert_list_sai_mirror_session_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_mirror_session_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_mirror_session_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::MirrorSessionAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_mirror_session_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::MirrorSessionAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MirrorSessionCongestionMode
@@ -12923,12 +13924,19 @@ convert_list_sai_mirror_session_congestion_mode_t_to_proto(
 void convert_list_sai_mirror_session_congestion_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_mirror_session_congestion_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::MirrorSessionCongestionMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_mirror_session_congestion_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::MirrorSessionCongestionMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MirrorSessionType
@@ -12981,11 +13989,18 @@ convert_list_sai_mirror_session_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_mirror_session_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_mirror_session_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::MirrorSessionType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_mirror_session_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::MirrorSessionType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MyMacAttr convert_sai_my_mac_attr_t_to_proto(
@@ -13044,11 +14059,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_my_mac_attr_t_to_proto(
 void convert_list_sai_my_mac_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_my_mac_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::MyMacAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_my_mac_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::MyMacAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MySidEntryAttr
@@ -13126,11 +14148,18 @@ convert_list_sai_my_sid_entry_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_my_sid_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_my_sid_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::MySidEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_my_sid_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::MySidEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MySidEntryEndpointBehaviorFlavor
@@ -13221,12 +14250,19 @@ convert_list_sai_my_sid_entry_endpoint_behavior_flavor_t_to_proto(
 void convert_list_sai_my_sid_entry_endpoint_behavior_flavor_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_my_sid_entry_endpoint_behavior_flavor_t_to_sai(
-        static_cast<lemming::dataplane::sai::MySidEntryEndpointBehaviorFlavor>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_my_sid_entry_endpoint_behavior_flavor_t_to_sai(
+          static_cast<lemming::dataplane::sai::MySidEntryEndpointBehaviorFlavor>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::MySidEntryEndpointBehavior
@@ -13361,12 +14397,19 @@ convert_list_sai_my_sid_entry_endpoint_behavior_t_to_proto(
 void convert_list_sai_my_sid_entry_endpoint_behavior_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_my_sid_entry_endpoint_behavior_t_to_sai(
-        static_cast<lemming::dataplane::sai::MySidEntryEndpointBehavior>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_my_sid_entry_endpoint_behavior_t_to_sai(
+          static_cast<lemming::dataplane::sai::MySidEntryEndpointBehavior>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NatEntryAttr convert_sai_nat_entry_attr_t_to_proto(
@@ -13485,11 +14528,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_nat_entry_attr_t_to_proto(
 void convert_list_sai_nat_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_nat_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::NatEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_nat_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::NatEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NatEvent convert_sai_nat_event_t_to_proto(
@@ -13530,11 +14580,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_nat_event_t_to_proto(
 void convert_list_sai_nat_event_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_nat_event_t_to_sai(
-        static_cast<lemming::dataplane::sai::NatEvent>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_nat_event_t_to_sai(
+          static_cast<lemming::dataplane::sai::NatEvent>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NatType convert_sai_nat_type_t_to_proto(
@@ -13593,11 +14650,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_nat_type_t_to_proto(
 void convert_list_sai_nat_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_nat_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::NatType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_nat_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::NatType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NatZoneCounterAttr
@@ -13681,12 +14745,19 @@ convert_list_sai_nat_zone_counter_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_nat_zone_counter_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_nat_zone_counter_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::NatZoneCounterAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_nat_zone_counter_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::NatZoneCounterAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NativeHashField
@@ -13919,11 +14990,18 @@ convert_list_sai_native_hash_field_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_native_hash_field_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_native_hash_field_t_to_sai(
-        static_cast<lemming::dataplane::sai::NativeHashField>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_native_hash_field_t_to_sai(
+          static_cast<lemming::dataplane::sai::NativeHashField>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NeighborEntryAttr
@@ -14012,11 +15090,18 @@ convert_list_sai_neighbor_entry_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_neighbor_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_neighbor_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::NeighborEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_neighbor_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::NeighborEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NextHopAttr convert_sai_next_hop_attr_t_to_proto(
@@ -14161,11 +15246,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_next_hop_attr_t_to_proto(
 void convert_list_sai_next_hop_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_next_hop_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::NextHopAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_next_hop_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::NextHopAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NextHopGroupAttr
@@ -14297,11 +15389,18 @@ convert_list_sai_next_hop_group_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_next_hop_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_next_hop_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::NextHopGroupAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_next_hop_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::NextHopGroupAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NextHopGroupMapAttr
@@ -14344,12 +15443,19 @@ convert_list_sai_next_hop_group_map_attr_t_to_proto(
 void convert_list_sai_next_hop_group_map_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_next_hop_group_map_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::NextHopGroupMapAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_next_hop_group_map_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::NextHopGroupMapAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NextHopGroupMapType
@@ -14388,12 +15494,19 @@ convert_list_sai_next_hop_group_map_type_t_to_proto(
 void convert_list_sai_next_hop_group_map_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_next_hop_group_map_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::NextHopGroupMapType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_next_hop_group_map_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::NextHopGroupMapType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NextHopGroupMemberAttr
@@ -14489,12 +15602,19 @@ convert_list_sai_next_hop_group_member_attr_t_to_proto(
 void convert_list_sai_next_hop_group_member_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_next_hop_group_member_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::NextHopGroupMemberAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_next_hop_group_member_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::NextHopGroupMemberAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NextHopGroupMemberConfiguredRole
@@ -14542,12 +15662,19 @@ convert_list_sai_next_hop_group_member_configured_role_t_to_proto(
 void convert_list_sai_next_hop_group_member_configured_role_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_next_hop_group_member_configured_role_t_to_sai(
-        static_cast<lemming::dataplane::sai::NextHopGroupMemberConfiguredRole>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_next_hop_group_member_configured_role_t_to_sai(
+          static_cast<lemming::dataplane::sai::NextHopGroupMemberConfiguredRole>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NextHopGroupMemberObservedRole
@@ -14595,12 +15722,19 @@ convert_list_sai_next_hop_group_member_observed_role_t_to_proto(
 void convert_list_sai_next_hop_group_member_observed_role_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_next_hop_group_member_observed_role_t_to_sai(
-        static_cast<lemming::dataplane::sai::NextHopGroupMemberObservedRole>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_next_hop_group_member_observed_role_t_to_sai(
+          static_cast<lemming::dataplane::sai::NextHopGroupMemberObservedRole>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NextHopGroupType
@@ -14672,11 +15806,18 @@ convert_list_sai_next_hop_group_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_next_hop_group_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_next_hop_group_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::NextHopGroupType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_next_hop_group_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::NextHopGroupType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::NextHopType convert_sai_next_hop_type_t_to_proto(
@@ -14735,11 +15876,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_next_hop_type_t_to_proto(
 void convert_list_sai_next_hop_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_next_hop_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::NextHopType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_next_hop_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::NextHopType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::ObjectStage convert_sai_object_stage_t_to_proto(
@@ -14786,11 +15934,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_object_stage_t_to_proto(
 void convert_list_sai_object_stage_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_object_stage_t_to_sai(
-        static_cast<lemming::dataplane::sai::ObjectStage>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_object_stage_t_to_sai(
+          static_cast<lemming::dataplane::sai::ObjectStage>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::ObjectTypeExtensions
@@ -14983,12 +16138,19 @@ convert_list_sai_object_type_extensions_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_object_type_extensions_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_object_type_extensions_t_to_sai(
-        static_cast<lemming::dataplane::sai::ObjectTypeExtensions>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_object_type_extensions_t_to_sai(
+          static_cast<lemming::dataplane::sai::ObjectTypeExtensions>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::ObjectType convert_sai_object_type_t_to_proto(
@@ -15701,11 +16863,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_object_type_t_to_proto(
 void convert_list_sai_object_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_object_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::ObjectType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_object_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::ObjectType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::OutDropReason convert_sai_out_drop_reason_t_to_proto(
@@ -15783,11 +16952,18 @@ convert_list_sai_out_drop_reason_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_out_drop_reason_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_out_drop_reason_t_to_sai(
-        static_cast<lemming::dataplane::sai::OutDropReason>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_out_drop_reason_t_to_sai(
+          static_cast<lemming::dataplane::sai::OutDropReason>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::OutsegExpMode convert_sai_outseg_exp_mode_t_to_proto(
@@ -15828,11 +17004,18 @@ convert_list_sai_outseg_exp_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_outseg_exp_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_outseg_exp_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::OutsegExpMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_outseg_exp_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::OutsegExpMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::OutsegTtlMode convert_sai_outseg_ttl_mode_t_to_proto(
@@ -15873,11 +17056,18 @@ convert_list_sai_outseg_ttl_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_outseg_ttl_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_outseg_ttl_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::OutsegTtlMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_outseg_ttl_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::OutsegTtlMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::OutsegType convert_sai_outseg_type_t_to_proto(
@@ -15918,11 +17108,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_outseg_type_t_to_proto(
 void convert_list_sai_outseg_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_outseg_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::OutsegType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_outseg_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::OutsegType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PacketAction convert_sai_packet_action_t_to_proto(
@@ -16005,11 +17202,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_packet_action_t_to_proto(
 void convert_list_sai_packet_action_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_packet_action_t_to_sai(
-        static_cast<lemming::dataplane::sai::PacketAction>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_packet_action_t_to_sai(
+          static_cast<lemming::dataplane::sai::PacketAction>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PacketColor convert_sai_packet_color_t_to_proto(
@@ -16056,11 +17260,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_packet_color_t_to_proto(
 void convert_list_sai_packet_color_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_packet_color_t_to_sai(
-        static_cast<lemming::dataplane::sai::PacketColor>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_packet_color_t_to_sai(
+          static_cast<lemming::dataplane::sai::PacketColor>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PacketVlan convert_sai_packet_vlan_t_to_proto(
@@ -16107,11 +17318,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_packet_vlan_t_to_proto(
 void convert_list_sai_packet_vlan_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_packet_vlan_t_to_sai(
-        static_cast<lemming::dataplane::sai::PacketVlan>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_packet_vlan_t_to_sai(
+          static_cast<lemming::dataplane::sai::PacketVlan>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PoePortActiveChannelType
@@ -16161,12 +17379,19 @@ convert_list_sai_poe_port_active_channel_type_t_to_proto(
 void convert_list_sai_poe_port_active_channel_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_poe_port_active_channel_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PoePortActiveChannelType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_poe_port_active_channel_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PoePortActiveChannelType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PoePortClassMethodType
@@ -16210,12 +17435,19 @@ convert_list_sai_poe_port_class_method_type_t_to_proto(
 void convert_list_sai_poe_port_class_method_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_poe_port_class_method_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PoePortClassMethodType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_poe_port_class_method_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PoePortClassMethodType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PoePortSignatureType
@@ -16258,12 +17490,19 @@ convert_list_sai_poe_port_signature_type_t_to_proto(
 void convert_list_sai_poe_port_signature_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_poe_port_signature_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PoePortSignatureType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_poe_port_signature_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PoePortSignatureType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PolicerAttr convert_sai_policer_attr_t_to_proto(
@@ -16378,11 +17617,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_policer_attr_t_to_proto(
 void convert_list_sai_policer_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_policer_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::PolicerAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_policer_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::PolicerAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PolicerColorSource
@@ -16429,12 +17675,19 @@ convert_list_sai_policer_color_source_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_policer_color_source_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_policer_color_source_t_to_sai(
-        static_cast<lemming::dataplane::sai::PolicerColorSource>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_policer_color_source_t_to_sai(
+          static_cast<lemming::dataplane::sai::PolicerColorSource>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PolicerMode convert_sai_policer_mode_t_to_proto(
@@ -16487,11 +17740,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_policer_mode_t_to_proto(
 void convert_list_sai_policer_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_policer_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::PolicerMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_policer_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::PolicerMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PolicerStat convert_sai_policer_stat_t_to_proto(
@@ -16574,11 +17834,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_policer_stat_t_to_proto(
 void convert_list_sai_policer_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_policer_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::PolicerStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_policer_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::PolicerStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortAttrExtensions
@@ -16619,12 +17886,19 @@ convert_list_sai_port_attr_extensions_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_attr_extensions_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_attr_extensions_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortAttrExtensions>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_attr_extensions_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortAttrExtensions>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortAttr convert_sai_port_attr_t_to_proto(
@@ -17767,11 +19041,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_port_attr_t_to_proto(
 void convert_list_sai_port_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortAutoNegConfigMode
@@ -17826,12 +19107,19 @@ convert_list_sai_port_auto_neg_config_mode_t_to_proto(
 void convert_list_sai_port_auto_neg_config_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_auto_neg_config_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortAutoNegConfigMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_auto_neg_config_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortAutoNegConfigMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortBreakoutModeType
@@ -17892,12 +19180,19 @@ convert_list_sai_port_breakout_mode_type_t_to_proto(
 void convert_list_sai_port_breakout_mode_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_breakout_mode_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortBreakoutModeType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_breakout_mode_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortBreakoutModeType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortCablePairState
@@ -17956,12 +19251,19 @@ convert_list_sai_port_cable_pair_state_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_cable_pair_state_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_cable_pair_state_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortCablePairState>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_cable_pair_state_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortCablePairState>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortCableType convert_sai_port_cable_type_t_to_proto(
@@ -18026,11 +19328,18 @@ convert_list_sai_port_cable_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_cable_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_cable_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortCableType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_cable_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortCableType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortConnectorAttr
@@ -18093,11 +19402,18 @@ convert_list_sai_port_connector_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_connector_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_connector_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortConnectorAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_connector_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortConnectorAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortConnectorFailoverMode
@@ -18147,12 +19463,19 @@ convert_list_sai_port_connector_failover_mode_t_to_proto(
 void convert_list_sai_port_connector_failover_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_connector_failover_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortConnectorFailoverMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_connector_failover_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortConnectorFailoverMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortDatapathEnable
@@ -18193,12 +19516,19 @@ convert_list_sai_port_datapath_enable_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_datapath_enable_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_datapath_enable_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortDatapathEnable>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_datapath_enable_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortDatapathEnable>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortDualMedia convert_sai_port_dual_media_t_to_proto(
@@ -18257,11 +19587,18 @@ convert_list_sai_port_dual_media_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_dual_media_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_dual_media_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortDualMedia>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_dual_media_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortDualMedia>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortErrStatus convert_sai_port_err_status_t_to_proto(
@@ -18345,11 +19682,18 @@ convert_list_sai_port_err_status_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_err_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_err_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortErrStatus>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_err_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortErrStatus>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortErrorStatus
@@ -18465,11 +19809,18 @@ convert_list_sai_port_error_status_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_error_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_error_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortErrorStatus>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_error_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortErrorStatus>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortFecModeExtended
@@ -18528,12 +19879,19 @@ convert_list_sai_port_fec_mode_extended_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_fec_mode_extended_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_fec_mode_extended_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortFecModeExtended>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_fec_mode_extended_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortFecModeExtended>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortFecMode convert_sai_port_fec_mode_t_to_proto(
@@ -18580,11 +19938,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_port_fec_mode_t_to_proto(
 void convert_list_sai_port_fec_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_fec_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortFecMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_fec_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortFecMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortFlowControlMode
@@ -18637,12 +20002,19 @@ convert_list_sai_port_flow_control_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_flow_control_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_flow_control_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortFlowControlMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_flow_control_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortFlowControlMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortHostTxReadyStatus
@@ -18685,12 +20057,19 @@ convert_list_sai_port_host_tx_ready_status_t_to_proto(
 void convert_list_sai_port_host_tx_ready_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_host_tx_ready_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortHostTxReadyStatus>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_host_tx_ready_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortHostTxReadyStatus>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortInterfaceType
@@ -18875,11 +20254,18 @@ convert_list_sai_port_interface_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_interface_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_interface_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortInterfaceType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_interface_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortInterfaceType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortInternalLoopbackMode
@@ -18929,12 +20315,19 @@ convert_list_sai_port_internal_loopback_mode_t_to_proto(
 void convert_list_sai_port_internal_loopback_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_internal_loopback_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortInternalLoopbackMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_internal_loopback_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortInternalLoopbackMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortLinkTrainingFailureStatus
@@ -18998,12 +20391,19 @@ convert_list_sai_port_link_training_failure_status_t_to_proto(
 void convert_list_sai_port_link_training_failure_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_link_training_failure_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortLinkTrainingFailureStatus>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_link_training_failure_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortLinkTrainingFailureStatus>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortLinkTrainingRxStatus
@@ -19047,12 +20447,19 @@ convert_list_sai_port_link_training_rx_status_t_to_proto(
 void convert_list_sai_port_link_training_rx_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_link_training_rx_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortLinkTrainingRxStatus>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_link_training_rx_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortLinkTrainingRxStatus>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortLoopbackMode
@@ -19111,11 +20518,18 @@ convert_list_sai_port_loopback_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_loopback_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_loopback_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortLoopbackMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_loopback_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortLoopbackMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortMdixModeConfig
@@ -19162,12 +20576,19 @@ convert_list_sai_port_mdix_mode_config_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_mdix_mode_config_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_mdix_mode_config_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortMdixModeConfig>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_mdix_mode_config_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortMdixModeConfig>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortMdixModeStatus
@@ -19208,12 +20629,19 @@ convert_list_sai_port_mdix_mode_status_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_mdix_mode_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_mdix_mode_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortMdixModeStatus>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_mdix_mode_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortMdixModeStatus>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortMediaType convert_sai_port_media_type_t_to_proto(
@@ -19272,11 +20700,18 @@ convert_list_sai_port_media_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_media_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_media_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortMediaType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_media_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortMediaType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortModuleType convert_sai_port_module_type_t_to_proto(
@@ -19323,11 +20758,18 @@ convert_list_sai_port_module_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_module_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_module_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortModuleType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_module_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortModuleType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortOperStatus convert_sai_port_oper_status_t_to_proto(
@@ -19386,11 +20828,18 @@ convert_list_sai_port_oper_status_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_oper_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_oper_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortOperStatus>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_oper_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortOperStatus>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortPathTracingTimestampType
@@ -19447,12 +20896,19 @@ convert_list_sai_port_path_tracing_timestamp_type_t_to_proto(
 void convert_list_sai_port_path_tracing_timestamp_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_path_tracing_timestamp_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortPathTracingTimestampType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_path_tracing_timestamp_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortPathTracingTimestampType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortPoolAttr convert_sai_port_pool_attr_t_to_proto(
@@ -19499,11 +20955,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_port_pool_attr_t_to_proto(
 void convert_list_sai_port_pool_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_pool_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortPoolAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_pool_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortPoolAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortPoolStat convert_sai_port_pool_stat_t_to_proto(
@@ -19671,11 +21134,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_port_pool_stat_t_to_proto(
 void convert_list_sai_port_pool_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_pool_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortPoolStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_pool_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortPoolStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortPrbsConfig convert_sai_port_prbs_config_t_to_proto(
@@ -19728,11 +21198,18 @@ convert_list_sai_port_prbs_config_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_prbs_config_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_prbs_config_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortPrbsConfig>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_prbs_config_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortPrbsConfig>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortPrbsRxStatus
@@ -19785,11 +21262,18 @@ convert_list_sai_port_prbs_rx_status_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_prbs_rx_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_prbs_rx_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortPrbsRxStatus>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_prbs_rx_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortPrbsRxStatus>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortPriorityFlowControlMode
@@ -19834,12 +21318,19 @@ convert_list_sai_port_priority_flow_control_mode_t_to_proto(
 void convert_list_sai_port_priority_flow_control_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_priority_flow_control_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortPriorityFlowControlMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_priority_flow_control_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortPriorityFlowControlMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortPtpMode convert_sai_port_ptp_mode_t_to_proto(
@@ -19886,11 +21377,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_port_ptp_mode_t_to_proto(
 void convert_list_sai_port_ptp_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_ptp_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortPtpMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_ptp_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortPtpMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortSerdesAttr convert_sai_port_serdes_attr_t_to_proto(
@@ -20039,11 +21537,18 @@ convert_list_sai_port_serdes_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_serdes_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_serdes_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortSerdesAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_serdes_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortSerdesAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortStatExtensions
@@ -20143,12 +21648,19 @@ convert_list_sai_port_stat_extensions_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_port_stat_extensions_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_stat_extensions_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortStatExtensions>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_stat_extensions_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortStatExtensions>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortStat convert_sai_port_stat_t_to_proto(
@@ -21584,11 +23096,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_port_stat_t_to_proto(
 void convert_list_sai_port_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::PortType convert_sai_port_type_t_to_proto(
@@ -21641,11 +23160,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_port_type_t_to_proto(
 void convert_list_sai_port_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_port_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::PortType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_port_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::PortType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::QosMapAttr convert_sai_qos_map_attr_t_to_proto(
@@ -21686,11 +23212,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_qos_map_attr_t_to_proto(
 void convert_list_sai_qos_map_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_qos_map_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::QosMapAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_qos_map_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::QosMapAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::QosMapType convert_sai_qos_map_type_t_to_proto(
@@ -21816,11 +23349,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_qos_map_type_t_to_proto(
 void convert_list_sai_qos_map_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_qos_map_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::QosMapType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_qos_map_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::QosMapType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::QueueAttr convert_sai_queue_attr_t_to_proto(
@@ -21939,11 +23479,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_queue_attr_t_to_proto(
 void convert_list_sai_queue_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_queue_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::QueueAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_queue_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::QueueAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::QueuePfcContinuousDeadlockState
@@ -22000,12 +23547,19 @@ convert_list_sai_queue_pfc_continuous_deadlock_state_t_to_proto(
 void convert_list_sai_queue_pfc_continuous_deadlock_state_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_queue_pfc_continuous_deadlock_state_t_to_sai(
-        static_cast<lemming::dataplane::sai::QueuePfcContinuousDeadlockState>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_queue_pfc_continuous_deadlock_state_t_to_sai(
+          static_cast<lemming::dataplane::sai::QueuePfcContinuousDeadlockState>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::QueuePfcDeadlockEventType
@@ -22049,12 +23603,19 @@ convert_list_sai_queue_pfc_deadlock_event_type_t_to_proto(
 void convert_list_sai_queue_pfc_deadlock_event_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_queue_pfc_deadlock_event_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::QueuePfcDeadlockEventType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_queue_pfc_deadlock_event_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::QueuePfcDeadlockEventType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::QueueStat convert_sai_queue_stat_t_to_proto(
@@ -22329,11 +23890,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_queue_stat_t_to_proto(
 void convert_list_sai_queue_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_queue_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::QueueStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_queue_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::QueueStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::QueueType convert_sai_queue_type_t_to_proto(
@@ -22404,11 +23972,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_queue_type_t_to_proto(
 void convert_list_sai_queue_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_queue_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::QueueType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_queue_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::QueueType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::RouteEntryAttr convert_sai_route_entry_attr_t_to_proto(
@@ -22479,11 +24054,18 @@ convert_list_sai_route_entry_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_route_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_route_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::RouteEntryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_route_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::RouteEntryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::RouterInterfaceAttr
@@ -22661,12 +24243,19 @@ convert_list_sai_router_interface_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_router_interface_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_router_interface_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::RouterInterfaceAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_router_interface_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::RouterInterfaceAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::RouterInterfaceStat
@@ -22743,12 +24332,19 @@ convert_list_sai_router_interface_stat_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_router_interface_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_router_interface_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::RouterInterfaceStat>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_router_interface_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::RouterInterfaceStat>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::RouterInterfaceType
@@ -22819,12 +24415,19 @@ convert_list_sai_router_interface_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_router_interface_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_router_interface_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::RouterInterfaceType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_router_interface_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::RouterInterfaceType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::RpfGroupAttr convert_sai_rpf_group_attr_t_to_proto(
@@ -22865,11 +24468,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_rpf_group_attr_t_to_proto(
 void convert_list_sai_rpf_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_rpf_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::RpfGroupAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_rpf_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::RpfGroupAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::RpfGroupMemberAttr
@@ -22910,12 +24520,19 @@ convert_list_sai_rpf_group_member_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_rpf_group_member_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_rpf_group_member_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::RpfGroupMemberAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_rpf_group_member_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::RpfGroupMemberAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SamplepacketAttr
@@ -22974,11 +24591,18 @@ convert_list_sai_samplepacket_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_samplepacket_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_samplepacket_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::SamplepacketAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_samplepacket_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::SamplepacketAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SamplepacketMode
@@ -23019,11 +24643,18 @@ convert_list_sai_samplepacket_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_samplepacket_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_samplepacket_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::SamplepacketMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_samplepacket_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::SamplepacketMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SamplepacketType
@@ -23064,11 +24695,18 @@ convert_list_sai_samplepacket_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_samplepacket_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_samplepacket_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::SamplepacketType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_samplepacket_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::SamplepacketType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SchedulerAttr convert_sai_scheduler_attr_t_to_proto(
@@ -23139,11 +24777,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_scheduler_attr_t_to_proto(
 void convert_list_sai_scheduler_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_scheduler_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::SchedulerAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_scheduler_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::SchedulerAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SchedulerGroupAttr
@@ -23214,12 +24859,19 @@ convert_list_sai_scheduler_group_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_scheduler_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_scheduler_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::SchedulerGroupAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_scheduler_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::SchedulerGroupAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SchedulingType convert_sai_scheduling_type_t_to_proto(
@@ -23266,11 +24918,18 @@ convert_list_sai_scheduling_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_scheduling_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_scheduling_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::SchedulingType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_scheduling_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::SchedulingType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SerCorrectionType
@@ -23335,11 +24994,18 @@ convert_list_sai_ser_correction_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_ser_correction_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ser_correction_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::SerCorrectionType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ser_correction_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::SerCorrectionType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SerLogType convert_sai_ser_log_type_t_to_proto(
@@ -23404,11 +25070,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ser_log_type_t_to_proto(
 void convert_list_sai_ser_log_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ser_log_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::SerLogType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ser_log_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::SerLogType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SerType convert_sai_ser_type_t_to_proto(
@@ -23461,11 +25134,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_ser_type_t_to_proto(
 void convert_list_sai_ser_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_ser_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::SerType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_ser_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::SerType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::Srv6SidlistAttr
@@ -23530,11 +25210,18 @@ convert_list_sai_srv6_sidlist_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_srv6_sidlist_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_srv6_sidlist_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::Srv6SidlistAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_srv6_sidlist_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::Srv6SidlistAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::Srv6SidlistStat
@@ -23575,11 +25262,18 @@ convert_list_sai_srv6_sidlist_stat_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_srv6_sidlist_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_srv6_sidlist_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::Srv6SidlistStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_srv6_sidlist_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::Srv6SidlistStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::Srv6SidlistType
@@ -23638,11 +25332,18 @@ convert_list_sai_srv6_sidlist_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_srv6_sidlist_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_srv6_sidlist_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::Srv6SidlistType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_srv6_sidlist_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::Srv6SidlistType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::StatsCountMode convert_sai_stats_count_mode_t_to_proto(
@@ -23695,11 +25396,18 @@ convert_list_sai_stats_count_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_stats_count_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_stats_count_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::StatsCountMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_stats_count_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::StatsCountMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::StatsMode convert_sai_stats_mode_t_to_proto(
@@ -23758,11 +25466,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_stats_mode_t_to_proto(
 void convert_list_sai_stats_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_stats_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::StatsMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_stats_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::StatsMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::StpAttr convert_sai_stp_attr_t_to_proto(
@@ -23809,11 +25524,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_stp_attr_t_to_proto(
 void convert_list_sai_stp_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_stp_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::StpAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_stp_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::StpAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::StpPortAttr convert_sai_stp_port_attr_t_to_proto(
@@ -23860,11 +25582,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_stp_port_attr_t_to_proto(
 void convert_list_sai_stp_port_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_stp_port_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::StpPortAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_stp_port_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::StpPortAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::StpPortState convert_sai_stp_port_state_t_to_proto(
@@ -23911,11 +25640,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_stp_port_state_t_to_proto(
 void convert_list_sai_stp_port_state_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_stp_port_state_t_to_sai(
-        static_cast<lemming::dataplane::sai::StpPortState>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_stp_port_state_t_to_sai(
+          static_cast<lemming::dataplane::sai::StpPortState>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchAsicSdkHealthCategory
@@ -23972,12 +25708,19 @@ convert_list_sai_switch_asic_sdk_health_category_t_to_proto(
 void convert_list_sai_switch_asic_sdk_health_category_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_asic_sdk_health_category_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchAsicSdkHealthCategory>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_asic_sdk_health_category_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchAsicSdkHealthCategory>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchAsicSdkHealthSeverity
@@ -24028,12 +25771,19 @@ convert_list_sai_switch_asic_sdk_health_severity_t_to_proto(
 void convert_list_sai_switch_asic_sdk_health_severity_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_asic_sdk_health_severity_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchAsicSdkHealthSeverity>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_asic_sdk_health_severity_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchAsicSdkHealthSeverity>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchAttrExtensions
@@ -24098,12 +25848,19 @@ convert_list_sai_switch_attr_extensions_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_switch_attr_extensions_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_attr_extensions_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchAttrExtensions>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_attr_extensions_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchAttrExtensions>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchAttr convert_sai_switch_attr_t_to_proto(
@@ -25619,11 +27376,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_switch_attr_t_to_proto(
 void convert_list_sai_switch_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchFailoverConfigMode
@@ -25667,12 +27431,19 @@ convert_list_sai_switch_failover_config_mode_t_to_proto(
 void convert_list_sai_switch_failover_config_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_failover_config_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchFailoverConfigMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_failover_config_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchFailoverConfigMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchFirmwareLoadMethod
@@ -25722,12 +27493,19 @@ convert_list_sai_switch_firmware_load_method_t_to_proto(
 void convert_list_sai_switch_firmware_load_method_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_firmware_load_method_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchFirmwareLoadMethod>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_firmware_load_method_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchFirmwareLoadMethod>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchFirmwareLoadType
@@ -25776,12 +27554,19 @@ convert_list_sai_switch_firmware_load_type_t_to_proto(
 void convert_list_sai_switch_firmware_load_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_firmware_load_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchFirmwareLoadType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_firmware_load_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchFirmwareLoadType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchHardwareAccessBus
@@ -25831,12 +27616,19 @@ convert_list_sai_switch_hardware_access_bus_t_to_proto(
 void convert_list_sai_switch_hardware_access_bus_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_hardware_access_bus_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchHardwareAccessBus>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_hardware_access_bus_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchHardwareAccessBus>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchHostifOperStatusUpdateMode
@@ -25886,12 +27678,19 @@ convert_list_sai_switch_hostif_oper_status_update_mode_t_to_proto(
 void convert_list_sai_switch_hostif_oper_status_update_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_hostif_oper_status_update_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchHostifOperStatusUpdateMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_hostif_oper_status_update_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchHostifOperStatusUpdateMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchMcastSnoopingCapability
@@ -25949,12 +27748,19 @@ convert_list_sai_switch_mcast_snooping_capability_t_to_proto(
 void convert_list_sai_switch_mcast_snooping_capability_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_mcast_snooping_capability_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchMcastSnoopingCapability>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_mcast_snooping_capability_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchMcastSnoopingCapability>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchOperStatus
@@ -26007,11 +27813,18 @@ convert_list_sai_switch_oper_status_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_switch_oper_status_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_oper_status_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchOperStatus>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_oper_status_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchOperStatus>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchRestartType
@@ -26058,11 +27871,18 @@ convert_list_sai_switch_restart_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_switch_restart_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_restart_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchRestartType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_restart_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchRestartType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchStat convert_sai_switch_stat_t_to_proto(
@@ -26264,11 +28084,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_switch_stat_t_to_proto(
 void convert_list_sai_switch_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchSwitchingMode
@@ -26309,12 +28136,19 @@ convert_list_sai_switch_switching_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_switch_switching_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_switching_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchSwitchingMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_switching_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchSwitchingMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchTunnelAttr
@@ -26429,11 +28263,18 @@ convert_list_sai_switch_tunnel_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_switch_tunnel_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_tunnel_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchTunnelAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_tunnel_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchTunnelAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SwitchType convert_sai_switch_type_t_to_proto(
@@ -26492,11 +28333,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_switch_type_t_to_proto(
 void convert_list_sai_switch_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_switch_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::SwitchType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_switch_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::SwitchType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SystemPortAttr convert_sai_system_port_attr_t_to_proto(
@@ -26567,11 +28415,18 @@ convert_list_sai_system_port_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_system_port_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_system_port_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::SystemPortAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_system_port_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::SystemPortAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::SystemPortType convert_sai_system_port_type_t_to_proto(
@@ -26612,11 +28467,18 @@ convert_list_sai_system_port_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_system_port_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_system_port_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::SystemPortType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_system_port_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::SystemPortType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TableBitmapClassificationEntryAction
@@ -26667,13 +28529,20 @@ convert_list_sai_table_bitmap_classification_entry_action_t_to_proto(
 void convert_list_sai_table_bitmap_classification_entry_action_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_table_bitmap_classification_entry_action_t_to_sai(
-        static_cast<
-            lemming::dataplane::sai::TableBitmapClassificationEntryAction>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_table_bitmap_classification_entry_action_t_to_sai(
+          static_cast<
+              lemming::dataplane::sai::TableBitmapClassificationEntryAction>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TableBitmapClassificationEntryAttr
@@ -26739,13 +28608,20 @@ convert_list_sai_table_bitmap_classification_entry_attr_t_to_proto(
 void convert_list_sai_table_bitmap_classification_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_table_bitmap_classification_entry_attr_t_to_sai(
-        static_cast<
-            lemming::dataplane::sai::TableBitmapClassificationEntryAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_table_bitmap_classification_entry_attr_t_to_sai(
+          static_cast<
+              lemming::dataplane::sai::TableBitmapClassificationEntryAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TableBitmapClassificationEntryStat
@@ -26796,13 +28672,20 @@ convert_list_sai_table_bitmap_classification_entry_stat_t_to_proto(
 void convert_list_sai_table_bitmap_classification_entry_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_table_bitmap_classification_entry_stat_t_to_sai(
-        static_cast<
-            lemming::dataplane::sai::TableBitmapClassificationEntryStat>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_table_bitmap_classification_entry_stat_t_to_sai(
+          static_cast<
+              lemming::dataplane::sai::TableBitmapClassificationEntryStat>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TableBitmapRouterEntryAction
@@ -26866,12 +28749,19 @@ convert_list_sai_table_bitmap_router_entry_action_t_to_proto(
 void convert_list_sai_table_bitmap_router_entry_action_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_table_bitmap_router_entry_action_t_to_sai(
-        static_cast<lemming::dataplane::sai::TableBitmapRouterEntryAction>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_table_bitmap_router_entry_action_t_to_sai(
+          static_cast<lemming::dataplane::sai::TableBitmapRouterEntryAction>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TableBitmapRouterEntryAttr
@@ -26965,12 +28855,19 @@ convert_list_sai_table_bitmap_router_entry_attr_t_to_proto(
 void convert_list_sai_table_bitmap_router_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_table_bitmap_router_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TableBitmapRouterEntryAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_table_bitmap_router_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TableBitmapRouterEntryAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TableBitmapRouterEntryStat
@@ -27016,12 +28913,19 @@ convert_list_sai_table_bitmap_router_entry_stat_t_to_proto(
 void convert_list_sai_table_bitmap_router_entry_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_table_bitmap_router_entry_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::TableBitmapRouterEntryStat>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_table_bitmap_router_entry_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::TableBitmapRouterEntryStat>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TableMetaTunnelEntryAction
@@ -27067,12 +28971,19 @@ convert_list_sai_table_meta_tunnel_entry_action_t_to_proto(
 void convert_list_sai_table_meta_tunnel_entry_action_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_table_meta_tunnel_entry_action_t_to_sai(
-        static_cast<lemming::dataplane::sai::TableMetaTunnelEntryAction>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_table_meta_tunnel_entry_action_t_to_sai(
+          static_cast<lemming::dataplane::sai::TableMetaTunnelEntryAction>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TableMetaTunnelEntryAttr
@@ -27134,12 +29045,19 @@ convert_list_sai_table_meta_tunnel_entry_attr_t_to_proto(
 void convert_list_sai_table_meta_tunnel_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_table_meta_tunnel_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TableMetaTunnelEntryAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_table_meta_tunnel_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TableMetaTunnelEntryAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TableMetaTunnelEntryStat
@@ -27183,12 +29101,19 @@ convert_list_sai_table_meta_tunnel_entry_stat_t_to_proto(
 void convert_list_sai_table_meta_tunnel_entry_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_table_meta_tunnel_entry_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::TableMetaTunnelEntryStat>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_table_meta_tunnel_entry_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::TableMetaTunnelEntryStat>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamAttr convert_sai_tam_attr_t_to_proto(
@@ -27241,11 +29166,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_tam_attr_t_to_proto(
 void convert_list_sai_tam_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamBindPointType
@@ -27316,11 +29248,18 @@ convert_list_sai_tam_bind_point_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_bind_point_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_bind_point_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamBindPointType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_bind_point_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamBindPointType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamCollectorAttr
@@ -27397,11 +29336,18 @@ convert_list_sai_tam_collector_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_collector_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_collector_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamCollectorAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_collector_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamCollectorAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamCounterSubscriptionAttr
@@ -27457,12 +29403,19 @@ convert_list_sai_tam_counter_subscription_attr_t_to_proto(
 void convert_list_sai_tam_counter_subscription_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_counter_subscription_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamCounterSubscriptionAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_counter_subscription_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamCounterSubscriptionAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamEventActionAttr
@@ -27503,12 +29456,19 @@ convert_list_sai_tam_event_action_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_event_action_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_event_action_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamEventActionAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_event_action_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamEventActionAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamEventAttr convert_sai_tam_event_attr_t_to_proto(
@@ -27567,11 +29527,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_tam_event_attr_t_to_proto(
 void convert_list_sai_tam_event_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_event_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamEventAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_event_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamEventAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamEventThresholdAttr
@@ -27638,12 +29605,19 @@ convert_list_sai_tam_event_threshold_attr_t_to_proto(
 void convert_list_sai_tam_event_threshold_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_event_threshold_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamEventThresholdAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_event_threshold_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamEventThresholdAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamEventThresholdUnit
@@ -27716,12 +29690,19 @@ convert_list_sai_tam_event_threshold_unit_t_to_proto(
 void convert_list_sai_tam_event_threshold_unit_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_event_threshold_unit_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamEventThresholdUnit>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_event_threshold_unit_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamEventThresholdUnit>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamEventType convert_sai_tam_event_type_t_to_proto(
@@ -27810,11 +29791,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_tam_event_type_t_to_proto(
 void convert_list_sai_tam_event_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_event_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamEventType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_event_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamEventType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamIntAttr convert_sai_tam_int_attr_t_to_proto(
@@ -27999,11 +29987,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_tam_int_attr_t_to_proto(
 void convert_list_sai_tam_int_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_int_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamIntAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_int_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamIntAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamIntPresenceType
@@ -28056,12 +30051,19 @@ convert_list_sai_tam_int_presence_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_int_presence_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_int_presence_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamIntPresenceType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_int_presence_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamIntPresenceType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamIntType convert_sai_tam_int_type_t_to_proto(
@@ -28138,11 +30140,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_tam_int_type_t_to_proto(
 void convert_list_sai_tam_int_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_int_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamIntType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_int_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamIntType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamMathFuncAttr
@@ -28177,11 +30186,18 @@ convert_list_sai_tam_math_func_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_math_func_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_math_func_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamMathFuncAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_math_func_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamMathFuncAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamReportAttr convert_sai_tam_report_attr_t_to_proto(
@@ -28264,11 +30280,18 @@ convert_list_sai_tam_report_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_report_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_report_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamReportAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_report_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamReportAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamReportIntervalUnit
@@ -28317,12 +30340,19 @@ convert_list_sai_tam_report_interval_unit_t_to_proto(
 void convert_list_sai_tam_report_interval_unit_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_report_interval_unit_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamReportIntervalUnit>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_report_interval_unit_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamReportIntervalUnit>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamReportMode convert_sai_tam_report_mode_t_to_proto(
@@ -28363,11 +30393,18 @@ convert_list_sai_tam_report_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_report_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_report_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamReportMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_report_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamReportMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamReportType convert_sai_tam_report_type_t_to_proto(
@@ -28456,11 +30493,18 @@ convert_list_sai_tam_report_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_report_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_report_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamReportType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_report_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamReportType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamReportingUnit
@@ -28513,11 +30557,18 @@ convert_list_sai_tam_reporting_unit_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_reporting_unit_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_reporting_unit_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamReportingUnit>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_reporting_unit_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamReportingUnit>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamTelMathFuncType
@@ -28582,12 +30633,19 @@ convert_list_sai_tam_tel_math_func_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_tel_math_func_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_tel_math_func_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamTelMathFuncType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_tel_math_func_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamTelMathFuncType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamTelTypeAttr
@@ -28732,11 +30790,18 @@ convert_list_sai_tam_tel_type_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_tel_type_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_tel_type_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamTelTypeAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_tel_type_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamTelTypeAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamTelemetryAttr
@@ -28789,11 +30854,18 @@ convert_list_sai_tam_telemetry_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_telemetry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_telemetry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamTelemetryAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_telemetry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamTelemetryAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamTelemetryType
@@ -28858,11 +30930,18 @@ convert_list_sai_tam_telemetry_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_telemetry_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_telemetry_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamTelemetryType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_telemetry_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamTelemetryType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamTransportAttr
@@ -28921,11 +31000,18 @@ convert_list_sai_tam_transport_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_transport_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_transport_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamTransportAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_transport_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamTransportAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamTransportAuthType
@@ -28974,12 +31060,19 @@ convert_list_sai_tam_transport_auth_type_t_to_proto(
 void convert_list_sai_tam_transport_auth_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_transport_auth_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamTransportAuthType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_transport_auth_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamTransportAuthType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TamTransportType
@@ -29038,11 +31131,18 @@ convert_list_sai_tam_transport_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tam_transport_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tam_transport_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TamTransportType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tam_transport_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TamTransportType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TlvType convert_sai_tlv_type_t_to_proto(
@@ -29095,11 +31195,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_tlv_type_t_to_proto(
 void convert_list_sai_tlv_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tlv_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TlvType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tlv_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TlvType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelAttr convert_sai_tunnel_attr_t_to_proto(
@@ -29324,11 +31431,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_tunnel_attr_t_to_proto(
 void convert_list_sai_tunnel_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelDecapEcnMode
@@ -29375,12 +31489,19 @@ convert_list_sai_tunnel_decap_ecn_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tunnel_decap_ecn_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_decap_ecn_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelDecapEcnMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_decap_ecn_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelDecapEcnMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelDscpMode convert_sai_tunnel_dscp_mode_t_to_proto(
@@ -29421,11 +31542,18 @@ convert_list_sai_tunnel_dscp_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tunnel_dscp_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_dscp_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelDscpMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_dscp_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelDscpMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelEncapEcnMode
@@ -29466,12 +31594,19 @@ convert_list_sai_tunnel_encap_ecn_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tunnel_encap_ecn_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_encap_ecn_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelEncapEcnMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_encap_ecn_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelEncapEcnMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelMapAttr convert_sai_tunnel_map_attr_t_to_proto(
@@ -29512,11 +31647,18 @@ convert_list_sai_tunnel_map_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tunnel_map_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_map_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelMapAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_map_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelMapAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelMapEntryAttr
@@ -29655,12 +31797,19 @@ convert_list_sai_tunnel_map_entry_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tunnel_map_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_map_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelMapEntryAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_map_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelMapEntryAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelMapType convert_sai_tunnel_map_type_t_to_proto(
@@ -29781,11 +31930,18 @@ convert_list_sai_tunnel_map_type_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tunnel_map_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_map_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelMapType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_map_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelMapType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelPeerMode convert_sai_tunnel_peer_mode_t_to_proto(
@@ -29826,11 +31982,18 @@ convert_list_sai_tunnel_peer_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tunnel_peer_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_peer_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelPeerMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_peer_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelPeerMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelStat convert_sai_tunnel_stat_t_to_proto(
@@ -29883,11 +32046,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_tunnel_stat_t_to_proto(
 void convert_list_sai_tunnel_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelTermTableEntryAttr
@@ -29988,12 +32158,19 @@ convert_list_sai_tunnel_term_table_entry_attr_t_to_proto(
 void convert_list_sai_tunnel_term_table_entry_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_term_table_entry_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelTermTableEntryAttr>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_term_table_entry_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelTermTableEntryAttr>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelTermTableEntryType
@@ -30049,12 +32226,19 @@ convert_list_sai_tunnel_term_table_entry_type_t_to_proto(
 void convert_list_sai_tunnel_term_table_entry_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_term_table_entry_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelTermTableEntryType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_term_table_entry_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelTermTableEntryType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelTtlMode convert_sai_tunnel_ttl_mode_t_to_proto(
@@ -30095,11 +32279,18 @@ convert_list_sai_tunnel_ttl_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_tunnel_ttl_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_ttl_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelTtlMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_ttl_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelTtlMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelType convert_sai_tunnel_type_t_to_proto(
@@ -30182,11 +32373,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_tunnel_type_t_to_proto(
 void convert_list_sai_tunnel_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::TunnelVxlanUdpSportMode
@@ -30230,12 +32428,19 @@ convert_list_sai_tunnel_vxlan_udp_sport_mode_t_to_proto(
 void convert_list_sai_tunnel_vxlan_udp_sport_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_tunnel_vxlan_udp_sport_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::TunnelVxlanUdpSportMode>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_tunnel_vxlan_udp_sport_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::TunnelVxlanUdpSportMode>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::UdfAttr convert_sai_udf_attr_t_to_proto(
@@ -30294,11 +32499,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_udf_attr_t_to_proto(
 void convert_list_sai_udf_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_udf_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::UdfAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_udf_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::UdfAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::UdfBase convert_sai_udf_base_t_to_proto(
@@ -30345,11 +32557,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_udf_base_t_to_proto(
 void convert_list_sai_udf_base_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_udf_base_t_to_sai(
-        static_cast<lemming::dataplane::sai::UdfBase>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_udf_base_t_to_sai(
+          static_cast<lemming::dataplane::sai::UdfBase>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::UdfGroupAttr convert_sai_udf_group_attr_t_to_proto(
@@ -30396,11 +32615,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_udf_group_attr_t_to_proto(
 void convert_list_sai_udf_group_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_udf_group_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::UdfGroupAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_udf_group_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::UdfGroupAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::UdfGroupType convert_sai_udf_group_type_t_to_proto(
@@ -30447,11 +32673,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_udf_group_type_t_to_proto(
 void convert_list_sai_udf_group_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_udf_group_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::UdfGroupType>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_udf_group_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::UdfGroupType>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::UdfMatchAttr convert_sai_udf_match_attr_t_to_proto(
@@ -30510,11 +32743,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_udf_match_attr_t_to_proto(
 void convert_list_sai_udf_match_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_udf_match_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::UdfMatchAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_udf_match_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::UdfMatchAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::VirtualRouterAttr
@@ -30591,11 +32831,18 @@ convert_list_sai_virtual_router_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_virtual_router_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_virtual_router_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::VirtualRouterAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_virtual_router_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::VirtualRouterAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::VlanAttr convert_sai_vlan_attr_t_to_proto(
@@ -30777,11 +33024,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_vlan_attr_t_to_proto(
 void convert_list_sai_vlan_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_vlan_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::VlanAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_vlan_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::VlanAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::VlanFloodControlType
@@ -30836,12 +33090,19 @@ convert_list_sai_vlan_flood_control_type_t_to_proto(
 void convert_list_sai_vlan_flood_control_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_vlan_flood_control_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::VlanFloodControlType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_vlan_flood_control_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::VlanFloodControlType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::VlanMcastLookupKeyType
@@ -30897,12 +33158,19 @@ convert_list_sai_vlan_mcast_lookup_key_type_t_to_proto(
 void convert_list_sai_vlan_mcast_lookup_key_type_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_vlan_mcast_lookup_key_type_t_to_sai(
-        static_cast<lemming::dataplane::sai::VlanMcastLookupKeyType>(
-            proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_vlan_mcast_lookup_key_type_t_to_sai(
+          static_cast<lemming::dataplane::sai::VlanMcastLookupKeyType>(
+              proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::VlanMemberAttr convert_sai_vlan_member_attr_t_to_proto(
@@ -30949,11 +33217,18 @@ convert_list_sai_vlan_member_attr_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_vlan_member_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_vlan_member_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::VlanMemberAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_vlan_member_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::VlanMemberAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::VlanStat convert_sai_vlan_stat_t_to_proto(
@@ -31066,11 +33341,18 @@ google::protobuf::RepeatedField<int> convert_list_sai_vlan_stat_t_to_proto(
 void convert_list_sai_vlan_stat_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_vlan_stat_t_to_sai(
-        static_cast<lemming::dataplane::sai::VlanStat>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_vlan_stat_t_to_sai(
+          static_cast<lemming::dataplane::sai::VlanStat>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::VlanTaggingMode
@@ -31117,11 +33399,18 @@ convert_list_sai_vlan_tagging_mode_t_to_proto(const sai_s32_list_t& list) {
 void convert_list_sai_vlan_tagging_mode_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_vlan_tagging_mode_t_to_sai(
-        static_cast<lemming::dataplane::sai::VlanTaggingMode>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_vlan_tagging_mode_t_to_sai(
+          static_cast<lemming::dataplane::sai::VlanTaggingMode>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
 
 lemming::dataplane::sai::WredAttr convert_sai_wred_attr_t_to_proto(
@@ -31393,9 +33682,16 @@ google::protobuf::RepeatedField<int> convert_list_sai_wred_attr_t_to_proto(
 void convert_list_sai_wred_attr_t_to_sai(
     int32_t* list, const google::protobuf::RepeatedField<int>& proto_list,
     uint32_t* count) {
-  for (int i = 0; i < proto_list.size(); i++) {
-    list[i] = convert_sai_wred_attr_t_to_sai(
-        static_cast<lemming::dataplane::sai::WredAttr>(proto_list[i]));
+  // SAI list attributes use a two-pass protocol: a caller may pass a null or
+  // undersized buffer purely to discover how many elements it must allocate.
+  // Only write into the buffer when it is large enough, but always report the
+  // required element count so the caller can retry.
+  const uint32_t required = static_cast<uint32_t>(proto_list.size());
+  if (list != nullptr && *count >= required) {
+    for (uint32_t i = 0; i < required; i++) {
+      list[i] = convert_sai_wred_attr_t_to_sai(
+          static_cast<lemming::dataplane::sai::WredAttr>(proto_list[i]));
+    }
   }
-  *count = proto_list.size();
+  *count = required;
 }
